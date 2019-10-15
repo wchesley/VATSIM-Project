@@ -4,6 +4,11 @@ require('dotenv').config()
 const mongoose = require('mongoose');
 var app = module.exports = {};
 
+ //TODO: 
+    // logic to determine what schema to use - switch stmt -Reading Only? 
+    // verify Fetch is working. -axios atm... will update to reduce dependencies.  
+    // logic to validate data? ensure we have data to write else put in n/a? -No need, someone (mongo or node) is auto filling in blank data; 
+
 class Client {
 
     /*
@@ -118,133 +123,136 @@ const writeClientToPersist = (client) => {
 
 
 const parseCLIENT = (client) => {
+    let record = { 
     // callsign:
-    let callsign = parts[0];    
+      callsign : parts[0] ,    
     
     // cid:
-    let cid = parts[1];
+      cid : parts[1] ,
     
     // realname:
-    let realname = parts[2];
+      realname : parts[2] ,
     
     // clienttype:
-    let clienttype = parts[3];
+      clienttype : parts[3] ,
     
     // frequency:
-    let frequency = parts[4];
+      frequency : parts[4] ,
 
     // latitude:
-    let latitude = parts[5];
+      latitude : parts[5] ,
 
     // longitude:
-    let longitude = parts[6];
+      longitude : parts[6] ,
 
     // altitude:
-    let altitude = parts[7];
+      altitude : parts[7] ,
 
     // groundspeed:
-    let groundspeed = parts[8];
+      groundspeed : parts[8] ,
 
     // planned_aircraft:
-    let planned_aircraft = parts[9];
+      planned_aircraft : parts[9] ,
 
     // planned_tascruise:
-    let planned_tascruise = parts[10];
+      planned_tascruise : parts[10] ,
 
     // planned_depairport:
-    let planned_depairport = parts[11];
+      planned_depairport : parts[11] ,
 
     // planned_altitude:
-    let planned_altitude = parts[12];
+      planned_altitude : parts[12] ,
 
     // planned_destairport:
-    let planned_destairport = parts[13];
+      planned_destairport : parts[13] ,
 
     // server:
-    let server = parts[14];
+      server : parts[14] ,
 
     // protrevision:
-    let protrevision = parts[15];
+      protrevision : parts[15] ,
 
     // rating:
-    let rating = parts[16];
+      rating : parts[16] ,
 
     // transponder:
-    let transponder = parts[17];
+      transponder : parts[17] ,
 
     // facilitytype:
-    let facilitytype = parts[18]; 
+      facilitytype : parts[18] , 
 
     // visualrange:
-    let visualrange = parts[19];
+      visualrange : parts[19] ,
     
     // planned_revision:
-    let planned_revision = parts[20];
+      planned_revision : parts[20] ,
 
     // planned_flighttype:
-    let planned_flighttype = parts[21];
+      planned_flighttype : parts[21] ,
 
     // planned_deptime:
-    let planned_deptime = parts[22];
+      planned_deptime : parts[22] ,
 
     // planned_actdeptime:
-    let planned_actdeptime = parts[23];
+      planned_actdeptime : parts[23] ,
 
     // planned_hrsenroute:
-    let planned_hrsenroute = parts[24];
+      planned_hrsenroute : parts[24] ,
 
     // planned_minenroute:
-    let planned_minenroute = parts[25]; 
+      planned_minenroute : parts[25] , 
 
     // planned_hrsfuel:
-    let planned_hrsfuel = parts[26];
+      planned_hrsfuel : parts[26] ,
 
     // planned_minfuel:
-    let planned_minfuel = parts[27];
+      planned_minfuel : parts[27] ,
 
     // planned_altairport:
-    let planned_altairport = parts[28];
+      planned_altairport : parts[28] ,
 
     // planned_remarks:
-    let planned_remarks = parts[29];
+      planned_remarks : parts[29] ,
 
     // planned_route:
-    let planned_route = parts[30];
+      planned_route : parts[30] ,
 
     // planned_depairport_lat:
-    let planned_depairport_lat = parts[31];
+      planned_depairport_lat : parts[31] ,
 
     // planned_depairport_lon:
-    let planned_depairport_lon = parts[32];
+      planned_depairport_lon : parts[32] ,
 
     // planned_destairport_lat:
-    let planned_destairport_lat = parts[33];
+      planned_destairport_lat : parts[33] ,
 
     // planned_destairport_lon:
-    let planned_destairport_lon = parts[34]; 
+      planned_destairport_lon : parts[34] , 
     // atis_message:
-    let atis_message = parts[35];
+      atis_message : parts[35] ,
 
     // time_last_atis_received:
-    let time_last_atis_received = parts[36];
+      time_last_atis_received : parts[36] ,
 
     // time_logon:
-    let time_logon = parts[37];
+      time_logon : parts[37] ,
     
     // heading:
-    let heading = parts[38];
+      heading : parts[38] ,
     
     // QNH_iHg:
-    let QNH_iHg = parts[39];
+      QNH_iHg : parts[39] ,
     
     // QNH_Mb: 
-    let QNH_Mb = parts[40];
-
-    //TODO: 
-    // logic to determine what schema to use - switch stmt
-    // write shcema's 
-    // verify Fetch is working. 
-    // logic to validate data? ensure we have data to write else put in n/a? 
+      QNH_Mb : parts[40]
+    }
+    try{
+        writeClientToPersist(record);
+    }
+    catch(err)
+    {
+        console.log("ERROR WRITING CLIENT TO DATABASE: "+ err); 
+    }
 }
 
 const parseVATSIM = (data) => {
