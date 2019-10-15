@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .container
+    h1 VATSIM Mongoose Tester
+    form(method="POST" action="submit")
+      .form-group.row
+        label.col-4.col-form-label(for='fname') First Name
+        .col-8
+          input#fname.form-control(name='fname', placeholder='Enter your first name here', type='text')
+      .form-group.row
+        label.col-4.col-form-label(for='lname') Last Name
+        .col-8
+          input#lname.form-control(name='lname', placeholder='Enter your last name here', type='text')
+      .form-group.row
+        label.col-4.col-form-label(for='roleselect') Select your Role
+        .col-8
+          select#roleselect.custom-select(name='roleselect')
+            option(value='CONTROLLER') Controller
+            option(value='PILOT') Pilot
+            option(value='OBSERVER') Observer
+      .form-group.row
+        label.col-4.col-form-label(for='email') Email
+        .col-8
+          input#email.form-control(name='email', placeholder='Enter your email here', type='text')
+      .form-group.row
+        .offset-4.col-8
+          button.btn.btn-primary(name='submit', type='submit') Submit
+
+  .container          
+    table.table
+      thead.thead-light
+        tr
+          th(scope='col') First
+          th(scope='col') Last
+          th(scope='col') Role
+          th(scope='col') Email
+      tbody
+        each val in data
+          tr
+            td #{val.fname}
+            td #{val.lname}
+            td #{val.role}
+            td #{val.email}

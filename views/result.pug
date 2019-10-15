@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .container
+    h1 Welcome
+    p 
+      | Thank you #{inquiry.fname} #{inquiry.lname} for your interest in becoming a #{inquiry.role}, we will email you at 
+      a(href="mailto:#{inquiry.email}") #{inquiry.email} 
+      | soon with more information.
+    p
+      a(href="/") Go Back
+
