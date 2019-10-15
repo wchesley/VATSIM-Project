@@ -274,7 +274,9 @@ const parseVATSIM = (data) => {
             console.log(`Callsign: ${callsign}`);
         } 
 
+        //This is also getting written to database, needlessly;
         if(callsign.startsWith("!CLIENTS")){
+            parts.slice(parts);
             start = true;
         }  
 
