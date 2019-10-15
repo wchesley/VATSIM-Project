@@ -48,7 +48,7 @@ router.post('/submit', (req, res, next) => {
       email: req.body.email
     };
 
-    writeToDatabase(record);
+    //writeToDatabase(record);
     
     res.render('result', {inquiry: record});
     //res.send(req.body.fname + " " + req.body.lname);    
