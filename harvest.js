@@ -107,7 +107,7 @@ const VATSIMSchema = new mongoose.Schema({
     QNH_Mb : String,
 });
 
-const VATSIMModel = new mongoose.model('VATSIM', VATSIMSchema);
+app.VATSIMModel = new mongoose.model('VATSIM', VATSIMSchema);
 
 const writeClientToPersist = (client) => {
     let record = new VATSIMModel(client);
