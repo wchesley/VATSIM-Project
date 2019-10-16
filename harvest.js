@@ -1,5 +1,4 @@
 const cron = require('node-cron');
-const axios = require('axios');
 const http = require('http')
 require('dotenv').config()
 const mongoose = require('mongoose');
