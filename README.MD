@@ -32,7 +32,7 @@ If you can get that far, then print all of the parts for each field and for each
 3. ~Output something fromeach client to console and pug template~
 4. ~Save data to mongoDB~
 5. ~Read Data from mongoDB~
-6. Heroku?
+6. ~Heroku?~
 
 ## Submitting your Work
 
