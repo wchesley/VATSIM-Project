@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config()
-var VATSIMData = require('./harvest')
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -29,7 +29,7 @@ db.once('open', function() {
   // we're connected!
   console.log("CONNECTED TO MONGODB");
 });
-VATSIMData.task;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
