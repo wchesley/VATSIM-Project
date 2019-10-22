@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('mongooseexample:server');
 var http = require('http');
 var VATSIMData = require('./harvest');
+require('../app_api/models/db');
 
 /**
  * Get port from environment and store in Express.
@@ -83,7 +84,7 @@ function onListening() {
   /**
    * Once server is up, run cron job to harvest data from VATSIM; 
    */
-  VATSIMData.task; 
+  VATSIMData.task;
 }
 
 /**
