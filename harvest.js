@@ -3,7 +3,7 @@ const http = require('http')
 require('dotenv').config()
 const mongoose = require('mongoose');
 var app = module.exports = {};
-const database = require('./app_api/models/MDBWrite');
+const database = require('./app_api/models/VATSIMCrud');
 const url = "http://us.data.vatsim.net/vatsim-data.txt";
 //TODO: 
 // logic to determine what schema to use - switch stmt -Reading Only? 
