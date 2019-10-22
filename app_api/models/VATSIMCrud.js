@@ -14,3 +14,14 @@ data.writeVATSIM = (parsedVATSIM) => {
         }
     })
 }
+
+data.readVATSIM = () => {
+    VATSIMModel.find({}, (err, vatsims) => {
+        if(err) {
+            return console.log(`ERROR READING DATA: ${err}`);
+        } 
+        else {
+            return vatsims;
+        }
+    })
+}

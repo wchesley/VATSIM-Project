@@ -40,4 +40,4 @@ process.on('SIGTERM', () => {
 });
 
 
-//require('./VATSIMmodel');
+require('./VATSIMmodel');
