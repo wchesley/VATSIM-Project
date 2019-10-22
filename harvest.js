@@ -3,6 +3,7 @@ const http = require('http')
 require('dotenv').config()
 const mongoose = require('mongoose');
 var app = module.exports = {};
+const database = require('./app_api/models/MDBWrite');
 const url = "http://us.data.vatsim.net/vatsim-data.txt";
 //TODO: 
 // logic to determine what schema to use - switch stmt -Reading Only? 
@@ -64,7 +65,7 @@ class Client {
 
 
 
-app.VATSIMModel = new mongoose.model('VATSIM', VATSIMSchema);
+//app.VATSIMModel = new mongoose.model('VATSIM', VATSIMSchema);
 
 const writeClientToPersist = (client) => {
   let record = app.VATSIMModel(client);
@@ -205,6 +206,7 @@ const parseCLIENT = (client) => {
   }
   try {
     //writeClientToPersist(record);
+    database.writeVATSIM(record);
   }
   catch (err) {
     console.log("ERROR WRITING CLIENT TO DATABASE: " + err);
