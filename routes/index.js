@@ -12,8 +12,7 @@ router.get('/', function(req, res, next) {
   VATSIM.find({}, (err, vatsims) => {
 
     res.render('index', { title: 'VATSIM', data: vatsims});
-  },).limit(10);
-
+  },).limit(10).sort({created_at:1});
 });
 
 module.exports = router;
