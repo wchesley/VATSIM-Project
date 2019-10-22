@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
 let dbURI = process.env.MONGO_DB_URI; 
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose connected to ${dbURI}`);
@@ -38,3 +38,6 @@ process.on('SIGTERM', () => {
     process.exit(0);
   });
 });
+
+
+//require('./VATSIMmodel');
