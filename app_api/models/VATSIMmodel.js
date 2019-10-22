@@ -44,4 +44,4 @@ const VATSIMSchema = new mongoose.Schema({
     QNH_Mb: String,
   });
 
-  mongoose.model('VATSIM', VATSIMSchema);
+mongoose.model('VATSIM', VATSIMSchema);

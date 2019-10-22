@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 require('./VATSIMmodel');
+const VATSIMModel = mongoose.model('VATSIM');
 let data = module.exports = {};
 
 data.writeVATSIM = (parsedVATSIM) => {
