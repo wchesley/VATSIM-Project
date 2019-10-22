@@ -1,17 +1,18 @@
 var express = require('express');
 var router = express.Router();
-const mongoose = require('mongoose');
-const VATSIM = require("../harvest")
+let mongoose = require('mongoose');
+require('../app_api/models/VATSIMmodel');
+const VATSIM = mongoose.model('VATSIM');
 
-const VATSIMInquiry = VATSIM.VATSIMModel; 
+//let VATSIMInquiry = VATSIM.readVATSIM(); 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
-  VATSIMInquiry.find({}, (err, vatsims) => {
+    
+  VATSIM.find({}, (err, vatsims) => {
 
     res.render('index', { title: 'VATSIM', data: vatsims});
-  });
+  },).limit(10);
 
 });
 
