@@ -57,11 +57,11 @@ The objective here is to provide a REST api of your own that closely mimics the 
 
 These will only be for Flights and not controllers, for now:
 
-- Arrived
-- Departed
-- Enroute
-- FlightInfo
-- Scheduled
+- [Arrived](https://flightaware.com/commercial/flightxml/explorer/#op_Arrived)
+- [Departed](https://flightaware.com/commercial/flightxml/explorer/#op_Departed)
+- [Enroute](https://flightaware.com/commercial/flightxml/explorer/#op_Enroute)
+- [FlightInfo](https://flightaware.com/commercial/flightxml/explorer/#op_FlightInfo)
+- [Scheduled](https://flightaware.com/commercial/flightxml/explorer/#op_Scheduled)
 
 A Word about the Scheduled Method
 
@@ -86,3 +86,4 @@ Submitted so far:
 - ~Assignment 3~
 - Assignement 4 **DUE: Oct 27**
 - Assignment 5 **DUE: Nov 3**
+5
