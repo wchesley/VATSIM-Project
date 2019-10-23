@@ -86,4 +86,3 @@ Submitted so far:
 - ~Assignment 3~
 - Assignement 4 **DUE: Oct 27**
 - Assignment 5 **DUE: Nov 3**
-5
