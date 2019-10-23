@@ -213,6 +213,18 @@ const parseCLIENT = (client) => {
   }
 }
 
+const determineARTCCZone = (potentialClient) => {
+  switch(potentialClient[11] || potentialClient[13]){
+    case 'KDPX':  
+    case 'KGEG':
+    case 'KSEA':
+      console.log(`FOUND ZSE PLANE:${potentialClient[0]}`)
+      parseCLIENT(parts);
+    default:
+      return;
+  }
+}
+
 const parseVATSIM = (data) => {
 
   let start = false;
@@ -228,8 +240,8 @@ const parseVATSIM = (data) => {
 
 
 
-    if (!callsign.startsWith(";") && !callsign.startsWith(" ") && start) {
-      console.log(`Callsign: ${callsign}`);
+    if (!callsign.startsWith(";") && !callsign.startsWith(" ") && start && !callsign.startsWith('!')) {
+      //console.log(`Callsign: ${callsign}`);
     }
 
     //This is also getting written to database, needlessly;
@@ -239,7 +251,7 @@ const parseVATSIM = (data) => {
     }
 
     if (start == true) {
-      parseCLIENT(parts);
+      determineARTCCZone(parts);
     }
 
     if (callsign.startsWith("!SERVERS" || "!PREFILE")) {
