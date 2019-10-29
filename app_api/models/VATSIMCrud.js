@@ -23,5 +23,5 @@ data.readVATSIM = () => {
         else {
             return vatsims;
         }
-    })
+    }).limit(10).sort({created_at:-1});
 }
