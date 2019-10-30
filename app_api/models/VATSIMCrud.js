@@ -15,7 +15,7 @@ data.writeVATSIM = (parsedVATSIM) => {
     })
 }
 
-data.readVATSIM = () => {
+data.readVATSIM = async () => {
     VATSIMModel.find({}, (err, vatsims) => {
         if(err) {
             return console.log(`ERROR READING DATA: ${err}`);
