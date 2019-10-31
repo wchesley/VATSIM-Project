@@ -10,6 +10,7 @@ data.writeVATSIM = (parsedVATSIM) => {
             return console.log(`ERROR WRITING ${record} to database\nERROR: ${err}`);
         }
         else {
+            console.log("wrote to database"); 
             return record; 
         }
     })
