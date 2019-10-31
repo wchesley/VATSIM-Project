@@ -22,7 +22,10 @@ data.readVATSIM = async () => {
             return console.log(`ERROR READING DATA: ${err}`);
         } 
         else {
-            return vatsims;
+            //return vatsims;
         }
-    }).limit(10).sort({created_at:-1});
+    }).limit(10).sort({created_at:-1}).then(function(vatsims){
+        console.log(vatsims);
+        return vatsims; 
+    });
 }
