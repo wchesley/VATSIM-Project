@@ -16,14 +16,14 @@ const client = {
 }
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  VATSIM.find({}, (err, vatsimData) => {
+  data.readVATSIM((err, vatsimData) => {
     if(err){
-      console.log(`ERROR!:${err}`)
+      return next(err)
     }
-    else if (vatsimData != undefined){
-      res.json(vatsimData);
+    else{
+      return res.render('index',{title:'Vatsimd',data:vatsimData})
     }
-  }).limit(10);
+  })
 });
 
 

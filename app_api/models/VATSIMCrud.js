@@ -16,18 +16,15 @@ writeVATSIM = (parsedVATSIM) => {
     })
 }
 
-const readVATSIM = async () => {
+const readVATSIM = (callback) => {
     VATSIMModel.find({}, (err, vatsims) => {
         if(err) {
             return console.log(`ERROR READING DATA: ${err}`);
         } 
         else {
-            //return vatsims;
+            return callback(null, vatsims);
         }
-    }).limit(10).sort({created_at:-1}).then(function(vatsims){
-        //console.log(vatsims);
-        return vatsims;  
-    })
+    }).limit(10).sort({created_at:-1})
 }
 
 let findClientbyCallsign = (callsign, callback) => {
@@ -54,5 +51,6 @@ module.exports = {
     writeVATSIM,
     readVATSIM,
     ReadPseudoVATSIM,
-    
+    findClientbyCallsign,
+
 };
