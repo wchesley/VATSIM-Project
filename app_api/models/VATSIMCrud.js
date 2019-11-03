@@ -27,30 +27,28 @@ const readVATSIM = (callback) => {
     }).limit(10).sort({created_at:-1})
 }
 
-let findClientbyCallsign = (callsign, callback) => {
-    VATSIMModel.find({}, (err, callsign) => {
+/**
+ * Search Vatsim collection 
+ * @param {Mongoose field item} field 
+ * @param {What you want from database} query 
+ * @param {Limit on returned number of items} limit 
+ * @param {callback function to return control to router/controller} callback 
+ */
+let findVATSIM = (field, query, limit, callback) => {
+    let limit = parseint(limit);  
+    VATSIMModel.find({}, (err, results) => {
         if(err){
-            console.log(err)
-            return callback(new Error(`Error occured ${err}`))
+            return callback(new Error(`ERROR: ${err}`))
         }
         else{
-            return callback(null, callsign)
+            return callback(null, results)
         }
-    }).where({callsign:callsign})
+    }).where(field + ':' + query).limit(limit)
 }
 
-ReadPseudoVATSIM = () => {
-    pseudoData = {
-        name:"Calvin Klien",
-        callsign:"Big Papa",
-        role:"Pilot"
-    }
-    return pseudoData; 
-}
 module.exports = {
     writeVATSIM,
     readVATSIM,
-    ReadPseudoVATSIM,
-    findClientbyCallsign,
+    findVATSIM,
 
 };
