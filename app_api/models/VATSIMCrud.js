@@ -1,9 +1,9 @@
 let mongoose = require('mongoose');
 require('./VATSIMmodel');
 const VATSIMModel = mongoose.model('VATSIM');
-let data = module.exports = {};
 
-data.writeVATSIM = (parsedVATSIM) => {
+
+writeVATSIM = (parsedVATSIM) => {
     let record = VATSIMModel(parsedVATSIM);
     record.save((err, record) => {
         if(err) {
@@ -16,7 +16,7 @@ data.writeVATSIM = (parsedVATSIM) => {
     })
 }
 
-data.readVATSIM = async () => {
+const readVATSIM = async () => {
     VATSIMModel.find({}, (err, vatsims) => {
         if(err) {
             return console.log(`ERROR READING DATA: ${err}`);
@@ -25,7 +25,22 @@ data.readVATSIM = async () => {
             //return vatsims;
         }
     }).limit(10).sort({created_at:-1}).then(function(vatsims){
-        console.log(vatsims);
-        return vatsims; 
-    });
+        //console.log(vatsims);
+        return vatsims;  
+    })
 }
+
+ReadPseudoVATSIM = () => {
+    pseudoData = {
+        name:"Calvin Klien",
+        callsign:"Big Papa",
+        role:"Pilot"
+    }
+    return pseudoData; 
+}
+module.exports = {
+    writeVATSIM,
+    readVATSIM,
+    ReadPseudoVATSIM,
+    
+};
