@@ -5,15 +5,13 @@ require('../app_api/models/VATSIMmodel');
 const VATSIM = mongoose.model('VATSIM');
 let data = require('../app_api/models/VATSIMCrud')
 let vatController = require("../controller/vatsimController");
+
 /**
- * Example for reading data from mongoose; 
- * this is a dummy record, only mocked data;
+ * TODO: 
+ * Migrate validation logic to controller
+ * migrate database calls to controller
  */
-const client = {
-  id: 100,
-  name:"dude",
-  role:"pilot"
-}
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   data.readVATSIM((err, vatsimData) => {
@@ -31,9 +29,8 @@ router.get('/', (req, res, next) => {
  * GET single client by callsign
  */
 
-router.get('/api/callsign/:callsign', (req, res, next) => {
-  var callsign = req.params.callsign; 
-  data.findClientbyCallsign(callsign, (err, callsign) => {
+router.get('/api/callsign/:callsign', (req, res, next) => { 
+  data.findVATSIM("callsign", req.params.callsign, 1, (err, callsign) => {
     if(err){
       return next(err)
     }
@@ -44,7 +41,52 @@ router.get('/api/callsign/:callsign', (req, res, next) => {
 })
 
 /**
- * Pass client back as json object
+ * Find incoming flights based on given airport based on ICAO code
+ * 
+ */
+router.get('/api/incoming/:airport/:limit', (req, res, next) => {
+  data.findVATSIM("planned_destairport", req.params.airport, req.params.limit, (err, result) => {
+    if(err){
+      return next(err)
+    }
+    else{
+      return res.json(result)
+    }
+  })
+})
+
+/**
+ * Find departing flights based on given airport based on ICAO code
+ * 
+ */
+router.get('/api/departed/:airport/:limit', (req, res, next) => {
+  data.findVATSIM("planned_depairport", req.params.airport, req.params.limit, (err, result) => {
+    if(err){
+      return next(err)
+    }
+    else{
+      return res.json(result)
+    }
+  })
+})
+
+/**
+ * Search for anything within the VATSIM collection, specifiying one of the 41 predefined fields
+ * and then the specific item you are looking for. 
+ * For Example /api/find/clienttype/pilot/10
+ * a call made to this URL would return the first 10 pilots in the database
+ */
+router.get('/api/find/:field/:query/:limit', (req, res, next) => {
+  data.findVATSIM(req.params.field, req.params.query, req.params.limit, (err, results) => {
+    if(err){
+      return next(err)
+    }
+    else return res.json(results)
+  })
+})
+
+/**
+ * Finds all incoming flights to ZSE area: 
  */
 router.get('/api/ZSE/incoming', (req, res, next) => {
   VATSIM.find({}, 
@@ -74,7 +116,7 @@ router.get('/api/ZSE/incoming/:limit', (req, res, next) =>{
     }).limit(2)
 })
 
-router.get('/api/ZSE/departing', (req, res, next) => {
+router.get('/api/ZSE/departed', (req, res, next) => {
   var query = VATSIM.where({planned_depairport:['KSEA',"KDPX","KGEG"]})
   query.find((err, results) => {
     if(err){
