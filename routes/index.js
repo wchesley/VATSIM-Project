@@ -32,14 +32,15 @@ router.get('/', (req, res, next) => {
  */
 
 router.get('/api/callsign/:callsign', (req, res, next) => {
-  VATSIM.find({}, (err, callsign) => {
+  var callsign = req.params.callsign; 
+  data.findClientbyCallsign(callsign, (err, callsign) => {
     if(err){
-      console.log(`ERROR!:${err}`)
+      return next(err)
     }
-    else if(callsign != undefined){
-      res.json(callsign); 
+    else{
+      return res.json(callsign)
     }
-  }).where({callsign:req.param.callsign})
+  })
 })
 
 /**

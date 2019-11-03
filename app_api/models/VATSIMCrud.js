@@ -30,6 +30,18 @@ const readVATSIM = async () => {
     })
 }
 
+let findClientbyCallsign = (callsign, callback) => {
+    VATSIMModel.find({}, (err, callsign) => {
+        if(err){
+            console.log(err)
+            return callback(new Error(`Error occured ${err}`))
+        }
+        else{
+            return callback(null, callsign)
+        }
+    }).where({callsign:callsign})
+}
+
 ReadPseudoVATSIM = () => {
     pseudoData = {
         name:"Calvin Klien",
