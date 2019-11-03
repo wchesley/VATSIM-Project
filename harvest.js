@@ -212,7 +212,6 @@ const parseCLIENT = (parts) => {
 }
 
 const determineARTCCZone = (Client) => {
-  console.log(`Currently evaluating ${Client.planned_destairport} && ${Client.planned_depairport}`);
   switch(Client.planned_depairport || Client.planned_destairport){
     case 'KDPX':  
     case 'KGEG':
@@ -244,7 +243,7 @@ const parseVATSIM = (data) => {
     }
 
     //This is also getting written to database, needlessly;
-    if (callsign.startsWith("!CLIENTS")) {
+    if (callsign.startsWith("!CLIENTS" || "!PREFILE" )) {
       parts.slice(parts);
       start = true;
     }
@@ -252,11 +251,12 @@ const parseVATSIM = (data) => {
     if (start == true) {
       let client = parseCLIENT(parts);
       if(determineARTCCZone(client)) {
+        console.log(`Found Flight: ${client.callsign} going to ${client.planned_destairport} leaving from: ${planned_depairport}`)
         validClientList.push(client)
       }
     }
 
-    if (callsign.startsWith("!SERVERS" || "!PREFILE")) {
+    if (callsign.startsWith("!SERVERS")) {
       //assume end of our desired data; instead of reading the rest of the file
       //we'll end it here. 
       start = false;
