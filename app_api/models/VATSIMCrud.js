@@ -29,10 +29,10 @@ const readVATSIM = (callback) => {
 
 /**
  * Search Vatsim collection 
- * @param {Mongoose field item} field 
- * @param {What you want from database} query 
- * @param {Limit on returned number of items} limit 
- * @param {callback function to return control to router/controller} callback 
+ * @param {*} field - Mongo field item
+ * @param {*} query - Mongo field value to search for 
+ * @param {*} limit - Limit on number of records returned
+ * @param {*} callback - Callback function
  */
 let findVATSIM = (field, query, limit, callback) => {
     let limit = parseint(limit);  
