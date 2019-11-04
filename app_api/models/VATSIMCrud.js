@@ -1,10 +1,24 @@
 let mongoose = require('mongoose');
 require('./VATSIMmodel');
+require('./PreflightModel');
 const VATSIMModel = mongoose.model('VATSIM');
-
+const preflightModel = mongoose.model('preflight'); 
 
 writeVATSIM = (parsedVATSIM) => {
     let record = VATSIMModel(parsedVATSIM);
+    record.save((err, record) => {
+        if(err) {
+            return console.log(`ERROR WRITING ${record} to database\nERROR: ${err}`);
+        }
+        else {
+            console.log("wrote to database"); 
+            return record; 
+        }
+    })
+}
+
+writePreflight = (parsedVATSIM) => {
+    let record = preflightModel(parsedVATSIM);
     record.save((err, record) => {
         if(err) {
             return console.log(`ERROR WRITING ${record} to database\nERROR: ${err}`);
@@ -50,5 +64,6 @@ module.exports = {
     writeVATSIM,
     readVATSIM,
     findVATSIM,
-
+    writePreflight,
+    
 };

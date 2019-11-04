@@ -226,7 +226,7 @@ const determineARTCCZone = (Client) => {
 const parseVATSIM = (data) => {
   let validClientList = []; 
   let start = false;
-
+  let preflightMark = false;
   lines = data.split("\n");
 
   lines.forEach(element => {
@@ -243,9 +243,15 @@ const parseVATSIM = (data) => {
     }
 
     //This is also getting written to database, needlessly;
-    if (callsign.startsWith("!CLIENTS" || "!PREFILE" )) {
+    if (callsign.startsWith("!CLIENTS")) {
       parts.slice(parts);
       start = true;
+    }
+    if(callsign.startsWith("!PREFILE")){
+      start = false;
+      database.writeVATSIM(validClientList);
+      validClientList = [];
+      preflightMark = true;
     }
 
     if (start == true) {
@@ -256,10 +262,11 @@ const parseVATSIM = (data) => {
       }
     }
 
-    if (callsign.startsWith("!SERVERS")) {
+    if (callsign.startsWith("!SERVERS") && preflightMark == true) {
       //assume end of our desired data; instead of reading the rest of the file
       //we'll end it here. 
-      start = false;
+      preflightMark = false;
+      database.writePreflight(validClientList); 
       return;
     }
 
@@ -307,7 +314,7 @@ const parseVATSIM = (data) => {
   });
 
   console.log("DUDE " + new Date().toTimeString());
-  database.writeVATSIM(validClientList); 
+   
 };
 
 app.task = cron.schedule('*/2 * * * *', () => {
