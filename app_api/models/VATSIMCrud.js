@@ -5,8 +5,7 @@ const VATSIMModel = mongoose.model('VATSIM');
 const preflightModel = mongoose.model('preflight'); 
 
 writeVATSIM = (parsedVATSIM) => {
-    let record = VATSIMModel(parsedVATSIM);
-    record.save((err, record) => {
+    VATSIMModel.insertMany(parsedVATSIM, (err, record) => {
         if(err) {
             return console.log(`ERROR WRITING ${record} to database\nERROR: ${err}`);
         }
