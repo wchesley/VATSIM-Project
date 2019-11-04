@@ -41,6 +41,19 @@ const readVATSIM = (callback) => {
     }).limit(10).sort({created_at:-1})
 }
 
+
+
+const readPreflight = (callback) => {
+    preflightModel.find({}, (err, results)=>{
+        if(err){
+            console.log(`ERROR READING DATA ${err}`)
+        }
+        else{
+            return callback(null, results)
+        }
+    }).limit(10).sort({created_at:-1})
+}
+
 /**
  * Search Vatsim collection 
  * @param {*} field - Mongo field item
@@ -49,7 +62,7 @@ const readVATSIM = (callback) => {
  * @param {*} callback - Callback function
  */
 let findVATSIM = (field, query, limit, callback) => {
-    let limit = parseint(limit);  
+    limit = parseint(limit);  
     VATSIMModel.find({}, (err, results) => {
         if(err){
             return callback(new Error(`ERROR: ${err}`))
@@ -65,5 +78,6 @@ module.exports = {
     readVATSIM,
     findVATSIM,
     writePreflight,
-    
+    readPreflight,
+
 };

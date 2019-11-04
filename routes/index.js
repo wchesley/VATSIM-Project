@@ -24,6 +24,16 @@ router.get('/', (req, res, next) => {
   })
 });
 
+router.get('/api/prefile', (req, res, next) => {
+  data.readPreflight((err, results) => {
+    if(err){
+      return next(err)
+    }
+    else{
+      return res.json(results)
+    }
+  })
+})
 
 /**
  * GET single client by callsign

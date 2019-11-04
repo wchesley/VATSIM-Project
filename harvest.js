@@ -254,7 +254,7 @@ const parseVATSIM = (data) => {
       preflightMark = true;
     }
 
-    if (start == true) {
+    if (start == true || preflightMark == true) {
       let client = parseCLIENT(parts);
       if(determineARTCCZone(client)) {
         console.log(`Found Flight: ${client.callsign} going to ${client.planned_destairport} leaving from: ${client.planned_depairport}`)
