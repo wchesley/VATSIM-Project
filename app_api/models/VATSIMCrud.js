@@ -17,8 +17,7 @@ writeVATSIM = (parsedVATSIM) => {
 }
 
 writePreflight = (parsedVATSIM) => {
-    let record = preflightModel(parsedVATSIM);
-    record.save((err, record) => {
+    preflightModel.insertMany(parsedVATSIM, (err, record) => {
         if(err) {
             return console.log(`ERROR WRITING ${record} to database\nERROR: ${err}`);
         }
